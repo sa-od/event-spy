@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     // Log received events to terminal
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}] Received ${docs.length} event(s) from project "${project.name}" (${project.domain})`);
-    for (const doc of docs) {
+    for (const doc of docs as Record<string, unknown>[]) {
       const tag = doc.elementTag ? ` <${doc.elementTag}>` : '';
       const text = doc.elementText ? ` "${String(doc.elementText).slice(0, 40)}"` : '';
       const page = doc.pageUrl || '';
